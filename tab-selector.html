@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Tab selector</title>
+    <style>
+      .container {
+        border: 1px solid grey;
+        margin: 0 auto;
+        width: 80%;
+        height: 50%;
+      }
+      .selector {
+        display: flex;
+        background-color: #f1f1f1;
+        border-bottom: 1px solid grey; 
+      }
+      .tab {
+        padding: 10px;
+      }
+      
+      .tab:hover {
+        cursor: pointer;
+        background-color: gainsboro;
+      }
+      
+      .content {
+         padding: 10px;
+      }
+      .content-body {
+        display: none;
+      }
+      
+      .show-active {
+        display: block;
+      }
+      
+      .tab-active {
+        background-color: darkgrey;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="selector">
+        <div class="tab tab-active">Shirts</div>
+        <div class="tab">Pants</div>
+        <div class="tab">Shoes</div>
+      </div>
+      <div class="content">
+        <div id="Shirts" class="content-body show-active">
+          <h4>Shirts</h4>
+          <p>Our shirts are all of the highest quality material.</p>
+        </div>
+        <div id="Pants" class="content-body">
+          <h4>Pants</h4>
+          <p>Our pants can all be custom tailored.</p>
+        </div>
+        <div id="Shoes" class="content-body">
+          <h4>Shoes</h4>
+          <p>Our shoes are made from quality leather and canvas.</p>
+        </div>
+      </div
+    </div>
+    <script>
+      
+      //function to remove show-active class and add to clicked
+      //pass in el to represent the body connected to the clicked tab
+      //because the below click event uses e.currentTarget as the parameter for setNewActive and the function setNewActive takes el as the parameter.
+      function setNewActive(el) {
+        //select all content-body
+        var contentBodies = document.getElementsByClassName("content-body");
+        //remove show-active
+        for (var contentBody of contentBodies) {
+          contentBody.classList.remove("show-active");
+        }
+        //console.log(el.textContent);
+         //add show-active back to clicked
+        document.getElementById(el.textContent.trim()).classList.add("show-active");
+        
+        //remove active class from tab
+        var tab = document.getElementsByClassName("tab");
+        for (var tab of tabs) {
+          tab.classList.remove("tab-active");
+        }
+        
+        //add back active class to clicked tab
+        el.classList.add("tab-active");
+      }
+              
+       //select tab class and loop through
+      var tabs = document.getElementsByClassName('tab');
+      for (var tab of tabs) {
+        //add a click event listener to each tab
+        tab.addEventListener ('click', function(e) {
+          //console.log(e.currentTarget);
+          setNewActive(e.currentTarget)
+        })
+      }   
+     
+    </script>
+  </body>
+</html>

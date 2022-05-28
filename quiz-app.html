@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quiz App Project</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Outfit:wght@200;300;400&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+       font-weight: 400;
+       font-size: 38px;
+     }
+
+      h3 {
+        font-weight: 300;
+        margin-bottom: 30px;
+      }
+
+      button {
+        background-color: 	rgb(45, 182, 45);
+        color: white;
+        border: none;
+        width: 120px;
+        padding: 12px 25px;
+        margin-top: 20px;
+        font-size: 15px;
+        display: block;
+      }
+
+     .container {
+      font-family: 'Outfit', sans-serif;
+      margin: 20px;
+      }
+
+     .question-counter {
+        margin: 20px 0;
+      }
+
+     .question-content {
+        display: none;
+      }
+
+      .answer-area {
+        margin-top: 20px;
+        background-color: #f1f1f1;
+        font-weight: 300;
+      }
+
+      .active-question {
+        display: block;
+      }
+
+      .answer {
+        border: 1px solid white;
+        display: flex;
+        align-items: center;
+       
+      }
+
+      .answer input {
+          width: 15px;
+          height: 15px;
+          border: 1px solid white;
+          border-radius: 50%;
+          margin: 12px;
+          padding: 8px;
+      }
+
+      #question-counter-text {
+        font-weight: 300;
+      }
+
+      #result {
+        margin-top: 15px;
+        font-weight: 400;
+        display: none;
+      }
+
+      #resultBtn {
+        display: none;
+      }
+    
+    </style> 
+  </head>
+  <body>
+    <div class="container">
+      <h1>The eCommerce Quiz</h1>
+      <div class="question-counter">
+        <h2 id="question-counter-text"></h2>
+      </div>
+      <div id="1" class="question-content active-question">
+        <h3>Which of the following is not a real eCommerce platform?</h3>
+        <div class="answer-area">
+          <div class="answer">
+            <input type="radio" id="shopify" name="question1" value="wrong">
+            <label for="shopify">Shopify</label><br>
+          </div>
+          <div class="answer">
+            <input type="radio" id="woo" name="question1" value="wrong">
+            <label for="woo">WooCommerce</label><br>
+          </div>
+          <div class="answer">
+            <input type="radio" id="shopCom" name="question1" value="correct">
+            <label for="shopCom">ShopCommerce</label><br>
+          </div>
+          <div class="answer">
+            <input type="radio" id="bigCom" name="question1" value="wrong">
+            <label for="bigCom">BigCommerce</label> 
+          </div>
+        </div>
+      </div>
+
+      <div id="2" class="question-content">
+        <h3>If Shopify is so good, why are Shopify developers necessary?</h3>
+        <div class="answer-area">
+          <div class="answer">
+            <input type="radio" id="saveTime" name="question2" value="wrong">
+            <label for="saveTime">To save time on things like store setups and migrations</label><br>
+          </div>
+          <div class="answer">
+            <input type="radio" id="extendFunct" name="question2" value="wrong">
+            <label for="extendFunct">To extend the limited design options and functionalities of themes with custom code</label><br>
+          </div>
+          <div class="answer">
+            <input type="radio" id="support" name="question2" value="wrong">
+            <label for="support"> To provide support with a deep understanding of how the platform works and what its limitations are</label><br>
+          </div>
+          <div class="answer">
+            <input type="radio" id="all" name="question2" value="correct">
+            <label for="all">All of the above </label>
+          </div>
+        </div>
+      </div>
+
+      <div id="3" class="question-content">
+        <h3> Which of the following is true about Shopify developers?</h3>
+        <div class="answer-area">
+          <div class="answer">
+            <input type="radio" id="pay" name="question3" value="wrong">
+            <label for="pay">They are paid extremely well</label><br>
+           </div>
+           <div class="answer">
+            <input type="radio" id="demand" name="question3" value="wrong">
+            <label for="demand">There is a high demand for them</label><br>
+          </div>
+          <div class="answer">
+            <input type="radio" id="needToKnow" name="question3" value="wrong">
+            <label for="needToKnow">They need to know web development, the platform itself, and the liquid template language</label><br>
+          </div>
+          <div class="answer">
+            <input type="radio" id="allAbove" name="question3" value="correct">
+            <label for="allAbove">All of the Above</label>
+          </div>
+        </div>
+      </div>
+      <button id = "nextBtn">Next ❯</button>
+      <button id = "resultBtn">See How <br/> You Did</button>
+      <h3 id="result"></h3>
+    </div>
+
+	  <script>
+      var questions = document.getElementsByClassName("question-content");
+      var questionCounterText = document.getElementById("question-counter-text");
+      questionCounterText.innerHTML = 'Question 1 of 3';
+
+      function nextQuestion() {
+        for (var question of questions) {
+        //remove active class from question-content section
+          question.classList.remove("active-question");
+        }
+          //add active question class to current question
+          var currentQuestion = document.getElementById(questionCounter);
+          currentQuestion.classList.add("active-question");
+          //update questionCounterText
+          questionCounterText.innerHTML = `Question ${questionCounter} of 3`;
+          scoreKeeper();
+      };
+
+      //add correct radio values to tally score
+      var result = document.getElementById("result");
+      function scoreKeeper() {
+        var score = 0;
+        for(var i = 1 ; i <=3; i++) {
+          var responses = document.getElementsByName('question' + i);
+          for (var j = 0; j < responses.length; j++) {
+            var response = responses[j];
+            if (response.value == "correct" && response.checked) {
+              score = score + 1;
+            }
+          }
+          //display score in result div at end of quiz
+          if (score > 1 || score == 0) {
+            result.innerHTML = `You got ${score} questions correct!`;
+          } else {
+            result.innerHTML = `You got ${score} question correct!`;
+          }
+          //if (questionCounter == 3 && response.checked) {
+            //result.style.display = "block";
+           // hide nextBtn at end of quiz
+           // nextBtn.style.display = "none";
+          //}
+        }
+      };
+
+      //click event code for nextBtn
+      nextBtn = document.getElementById("nextBtn");
+      resultBtn = document.getElementById("resultBtn");
+      //var answer3 = document.querySelector('input[name="question3"]:checked');
+      var questionCounter = 1;
+      nextBtn.addEventListener("click", function(){
+        //iterate questionCounter if it is less than 3
+        if (questionCounter < 3){
+          questionCounter++
+        };
+        if (questionCounter === 3) {
+          resultBtn.style.display = "block";
+          nextBtn.style.display = "none"
+        }
+        //runs nextQuestion with every click
+        nextQuestion();
+        //run score keeper with every click
+      });
+
+      //resultBtn click event to run scoreKeeper for final question and display score
+      resultBtn.addEventListener("click", function (){
+        scoreKeeper();
+        result.style.display = "block";
+      });
+    </script>
+  </body>
+</html>
