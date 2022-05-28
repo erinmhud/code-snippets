@@ -1,0 +1,132 @@
+<div class="section-header text-center">
+    <h1>{{section.settings.heading}}</h1>
+</div>
+
+<div class="faq">
+    {% for block in section.blocks %}
+
+        {% if block.type == 'QA' %}
+            <div class="question">
+            <input type="checkbox" id="question-{{forloop.index}}" class="question-toggle">
+            <label for="question-{{forloop.index}}" class="question-label">{{block.settings.question}}</label>
+            <div class="answer">
+			{{block.settings.answer}}</div>
+        </div>
+
+        {% elsif block.type == 'headline'%}
+           <h4>{{block.settings.section-headline}}</h4> 
+        {% endif %}
+            
+    {% endfor %}
+	
+</div>
+
+{% schema %}
+{
+    "name": "customer questions", 
+    "settings": [
+        {
+            "type": "text", 
+            "label": "Heading for FAQ", 
+            "id": "heading"
+        }
+    ], 
+    "blocks": [
+        {
+            "type": "QA", 
+            "name": "Question/Answer", 
+            "settings": [
+                {
+                 "type": "text",
+                 "label": "Title (internal)",
+                 "id": "title-internal"   
+                },
+                {
+                "type": "text", 
+                "label": "Customer Question", 
+                "id": "question"
+                },
+                {
+                "type": "richtext", 
+                "label": "Answer to FAQ", 
+                "id": "answer"
+                }
+            ]
+        },
+        {
+            "type": "headline", 
+            "name": "headline", 
+            "settings": [
+                {
+                    "type": "text", 
+                    "label": "Section Headline", 
+                    "id": "section-headline"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}
+
+{% comment %} 
+--css styles to add to separate file--
+
+.faq
+        {
+        border-radius: 8px;
+        overflow: hidden;
+        }
+        
+        /* hide checkbox */
+        .faq .question-toggle
+        {
+        display: none;
+        }
+
+        /* style the label */
+        .faq .question-label
+        {
+        background-color: #0c007a;
+        display:flex;
+        justify-content: space-between;
+        padding:1em;
+        font-weight: bold;
+        color:white;
+        }
+        .faq .question-label:hover{
+        background-color: #1900fa;
+        }
+        .faq .question-toggle:checked ~.question-label
+        {
+        background-color: #1900fa;
+        }
+        .faq .question-label::after
+        {
+        content:'\276F';
+        transition: all .4s;
+        }
+        .faq .question-toggle:checked ~ .question-label::after
+        {
+        transform: rotate(90deg);
+        }
+
+        /* only show text when checkbox is checked */
+        .faq .answer
+        {
+        background-color: white;
+        max-height: 0px;
+        overflow: hidden;
+        transition: all .4s;
+        padding: 0 1em;
+        }
+        .faq .question-toggle:checked ~ .answer
+        {
+        max-height: 100vh;
+        padding:1em;
+        }
+
+
+
+
+
+ {% endcomment %}
