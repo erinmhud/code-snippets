@@ -1,0 +1,60 @@
+{
+    "sections": {
+      "main": {
+        "type": "main-test-product",
+        "settings": {
+          "tax": "taxes included",
+          "shipping": "ships in 2 days",
+          "show_reviews": true
+        }
+      },
+      "second": {
+        "type": "main-test-product",
+        "settings": {
+          "tax": "taxes not included",
+          "shipping": "ships in 6 days",
+          "show_reviews": false
+        }
+      },
+      "165393422080ebf224": {
+        "type": "image-with-text",
+        "blocks": {
+          "1653934220afd9432d-0": {
+            "type": "heading",
+            "settings": {
+              "heading": "Test"
+            }
+          },
+          "1653934220afd9432d-1": {
+            "type": "text",
+            "settings": {
+              "text": "<p>Text soon<\/p><p><\/p>"
+            }
+          },
+          "1653934220afd9432d-2": {
+            "type": "button",
+            "settings": {
+              "button_label": "Test Button label",
+              "button_link": "shopify:\/\/collections\/all"
+            }
+          }
+        },
+        "block_order": [
+          "1653934220afd9432d-0",
+          "1653934220afd9432d-1",
+          "1653934220afd9432d-2"
+        ],
+        "settings": {
+          "image": "shopify:\/\/shop_images\/about_4.jpg",
+          "height": "adapt",
+          "color_scheme": "background-1",
+          "layout": "image_first"
+        }
+      }
+    },
+    "order": [
+      "main",
+      "second",
+      "165393422080ebf224"
+    ]
+  }
